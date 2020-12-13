@@ -17,23 +17,23 @@ class Solution {
     
     int result;
     
-    public void findSum(TreeNode node, TreeNode parent, TreeNode grandParent) {
+    public void findSum(TreeNode node, int parentVal, int grandParentVal) {
         if(node == null) {
             return;
         }
         
-        if(grandParent != null && grandParent.val % 2 == 0) {
+        if(grandParentVal != -1 && grandParentVal % 2 == 0) {
             result = result+ node.val;
         }
         
-        findSum(node.left, node, parent);
-        findSum(node.right, node, parent);
+        findSum(node.left, node.val, parentVal);
+        findSum(node.right, node.val, parentVal);
         return;
     }
     
     public int sumEvenGrandparent(TreeNode root) {
         result = 0;
-        findSum(root, null, null);
+        findSum(root, -1, -1);
         return result;
     }
 }
